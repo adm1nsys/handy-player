@@ -1,3 +1,8 @@
+// Handy Player — CSS-3D phone with a music player.
+// Original code: Heorhii Romanenko, July 2023 (Admin Store site). Kept as written;
+// the only changes are marked "2026:" — tracks come from boot.js, new branding
+// and own artwork.
+
 // Создаем элементы
 const phone = document.createElement('div');
 phone.style.width = '300px';
@@ -535,7 +540,7 @@ phrasltitle.style.fontFamily = "Roboto-Bold";
 // phrasltitle.style.height = "90px";
 phrasltitle.style.textAlign = "center";
 phrasltitle.style.overflow = "hidden";
-phrasltitle.textContent = "Designed by Admin inc.";
+phrasltitle.textContent = "Designed by Heorhii Romanenko"; // 2026: new branding
 phrasltitle.style.color = "white";
 phrasltitle.style.transformStyle = 'preserve-3d';
 phrasltitle.style.backgroundSize = 'contain';
@@ -584,7 +589,7 @@ function getCurrentYear() {
 // Обновление текста надписи с текущим годом
 function updateYear() {
   const currentYear = getCurrentYear();
-  phrasltitle1.textContent = `Exclusive Use License for AS 2020 - ${currentYear}`;
+  phrasltitle1.textContent = `Handy Player concept · 2023 – ${currentYear}`; // 2026: new branding
 }
 
 // Вызов функции для первоначального обновления надписи
@@ -4058,8 +4063,8 @@ bgColor.style.height = '600px';
 bgBlack.style.width = '600px';
 bgBlack.style.height = '600px';
 
-bgColor.src = 'https://adm1nsys.github.io/data-one/player/img/logo/Pure Imagination.jpeg';
-bgBlack.src = 'https://adm1nsys.github.io/data-one/player/img/logo/Pure Imagination.jpeg';
+bgColor.src = tracks0Image(); // 2026: first track's artwork
+bgBlack.src = tracks0Image();
 
 // frameBg.style.background = "black";
 frameBg.style.display = "flex";
@@ -5204,49 +5209,8 @@ playerNext.addEventListener("mouseup", function() {
   playerNext.style.background = "rgba(255, 255, 255, 0";
 });
 
-// Создаем массив треков
-const tracks = [
-  {
-    title: "Experience",
-    duration1: "-5:15",
-    duration2: "17",
-    artist: "Ludovico Einaudi, Daniel Hope & I Virtuosi Italiani",
-    image: "https://adm1nsys.github.io/data-one/player/Experience.jpg",
-    image2: "https://adm1nsys.github.io/data-one/player/Experience.jpg",
-    audio: "https://adm1nsys.github.io/data-one/player/Experience.mp3",
-    playing: false
-  },
-  {
-    title: "Where Is My Mind",
-    duration1: "-2:45",
-    duration2: "45",
-    artist: "Maxence Cyrin",
-    image: "https://adm1nsys.github.io/data-one/player/Where Is My Mind.jpeg",
-    image2: "https://adm1nsys.github.io/data-one/player/Where Is My Mind.jpeg",
-    audio: "https://adm1nsys.github.io/data-one/player/Where Is My Mind.mp3",
-    playing: false
-  },
-  {
-    title: "Pure Imagination",
-    duration1: "-1:04",
-    duration2: "04",
-    artist: "Shiloh",
-    image: "https://adm1nsys.github.io/data-one/player/Pure Imagination.jpeg",
-    image2: "https://adm1nsys.github.io/data-one/player/Pure Imagination.jpeg",
-    audio: "https://adm1nsys.github.io/data-one/player/Pure Imagination.mp3",
-    playing: false
-  },
-  {
-    title: "The Beach (Instrumental + Slowed + Muffled)",
-    duration1: "-4:24",
-    duration2: "24",
-    artist: "mxpheebz",
-    image: "https://adm1nsys.github.io/data-one/player/The Beach.jpg",
-    image2: "https://adm1nsys.github.io/data-one/player/The Beach.jpg",
-    audio: "https://adm1nsys.github.io/data-one/player/The Beach.mp3",
-    playing: false
-  }
-];
+// 2026: tracks are loaded by boot.js
+const tracks = window.HANDY_TRACKS;
 
 // Функция для форматирования времени в минуты:секунды
 function formatTime(time) {
