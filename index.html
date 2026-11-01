@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="de" data-title-en="Handy Player · Heorhii Romanenko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Handy Player · Heorhii Romanenko</title>
+<meta name="description" content="Ein Smartphone aus reinem CSS 3D mit Musikplayer — rund 370 von Hand positionierte Elemente, gebaut 2023.">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500&family=Roboto:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="backdrop" aria-hidden="true"></div>
+
+<main class="wrap layout">
+  <section class="intro">
+    <p class="eyebrow" data-en="CSS 3D · JavaScript · 2023">CSS 3D · JavaScript · 2023</p>
+    <h1>Handy Player</h1>
+    <p class="lead" data-en="A smartphone built from pure CSS 3D — about 370 hand-positioned elements, a body without a single image and no 3D library — with a working music player on its screen.">Ein Smartphone aus reinem CSS 3D — rund 370 von Hand positionierte Elemente, ein Gehäuse ohne ein einziges Bild und ohne 3D-Bibliothek — mit einem funktionierenden Musikplayer auf dem Display.</p>
+
+    <div class="panel">
+      <div class="control">
+        <label for="ry" data-en="Rotate left / right">Drehen links / rechts</label>
+        <input id="ry" type="range" min="-180" max="180" step="1" value="0" data-ry>
+        <output data-ry-out>0°</output>
+      </div>
+      <div class="control">
+        <label for="rx" data-en="Tilt up / down">Kippen oben / unten</label>
+        <input id="rx" type="range" min="-60" max="60" step="1" value="0" data-rx>
+        <output data-rx-out>0°</output>
+      </div>
+      <div class="views">
+        <button class="btn" type="button" data-view="0,0" data-en="Front">Vorne</button>
+        <button class="btn" type="button" data-view="0,180" data-en="Back">Hinten</button>
+        <button class="btn" type="button" data-view="0,90" data-en="Side">Seite</button>
+        <button class="btn" type="button" data-view="8,-24" data-en="Reset">Zurücksetzen</button>
+      </div>
+      <p class="hint" data-en="Tip: drag the phone, and press play on its screen.">Tipp: Das Handy ziehen und auf dem Display auf Play drücken.</p>
+    </div>
+
+    <h2 data-en="Playlist">Playlist</h2>
+    <ul class="tracks" data-tracklist></ul>
+    <p class="credit" data-en-html="Previews provided courtesy of &lt;a href=&quot;https://music.apple.com&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Apple Music&lt;/a&gt;.">Vorschauen mit freundlicher Genehmigung von <a href="https://music.apple.com" target="_blank" rel="noopener">Apple Music</a>.</p>
+  </section>
+
+  <section class="stage" data-stage aria-label="3D phone"></section>
+</main>
+
+<footer class="wrap">
+  <p data-en-html="Built in July 2023 for my former Admin Store site and rescued from its asset repository, which has since been deleted. The phone code is kept as written; 2026 changes: new branding and rotation controls. &lt;a href=&quot;https://github.com/adm1nsys/handy-player&quot;&gt;Source&lt;/a&gt; · &lt;a href=&quot;https://adm1nsys.github.io/adm1nsys/&quot;&gt;adm1nsys&lt;/a&gt;">Gebaut im Juli 2023 für meine frühere Admin-Store-Website und aus deren Asset-Repository gerettet, das inzwischen gelöscht ist. Der Code des Handys ist unverändert; Änderungen 2026: neues Branding und Drehsteuerung. <a href="https://github.com/adm1nsys/handy-player">Quellcode</a> · <a href="https://adm1nsys.github.io/adm1nsys/">adm1nsys</a></p>
+</footer>
+
+<script src="src/boot.js"></script>
+<script src="assets/lang.js"></script>
+</body>
+</html>
