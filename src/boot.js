@@ -1,5 +1,6 @@
 // Loads the tracks, starts the 2023 phone (src/phone.js) and adds rotation controls.
 // Every track plays a 30-second Apple Music preview and links back to Apple Music.
+// The previews come from Apple's servers, so they load only after the visitor agrees.
 
 // The same songs the 2023 version played, now as official previews (iTunes track IDs)
 const TRACK_IDS = [1559739399, 505469711, 1440841512, 1030116018];
@@ -7,6 +8,17 @@ const LOOKUP = `https://itunes.apple.com/lookup?id=${TRACK_IDS.join(",")}&entity
 
 // phone.js read this global from another file of the 2023 site
 var MusicQuality = "Preview";
+
+const CONSENT_KEY = "handy-apple-previews";
+
+function consentGiven() {
+  try { return localStorage.getItem(CONSENT_KEY) === "1"; } catch (e) { return false; }
+}
+
+function setConsent(on) {
+  try { on ? localStorage.setItem(CONSENT_KEY, "1") : localStorage.removeItem(CONSENT_KEY); } catch (e) {}
+  location.reload();
+}
 
 // The lookup endpoint does not send CORS headers to every origin, but it supports JSONP
 function jsonp(url, timeout = 8000) {
@@ -54,6 +66,16 @@ async function loadTracks() {
   } catch (e) {
     return [];
   }
+}
+
+function renderConsent() {
+  const list = document.querySelector("[data-tracklist]");
+  list.innerHTML = `
+    <li class="consent">
+      <span data-en="The songs are 30-second previews from Apple Music. They load from Apple's servers, which then receive your IP address.">Die Songs sind 30-Sekunden-Vorschauen von Apple Music. Sie werden von Apple-Servern geladen, die dabei deine IP-Adresse erhalten.</span>
+      <button class="btn btn-sm" type="button" data-consent data-en="Load previews">Vorschauen laden</button>
+    </li>`;
+  list.querySelector("[data-consent]").addEventListener("click", () => setConsent(true));
 }
 
 function renderTracklist(tracks) {
@@ -130,12 +152,20 @@ function mountControls() {
 }
 
 (async () => {
-  const tracks = await loadTracks();
+  const allowed = consentGiven();
+  const tracks = allowed ? await loadTracks() : [];
   window.HANDY_TRACKS = tracks.length ? tracks : [{
     title: "Handy Player", artist: "Offline", image: "", image2: "", audio: "",
     duration1: "-0:00", duration2: "00", playing: false,
   }];
-  renderTracklist(tracks);
+  if (allowed) {
+    renderTracklist(tracks);
+    const off = document.querySelector("[data-consent-off]");
+    off.hidden = false;
+    off.addEventListener("click", () => setConsent(false));
+  } else {
+    renderConsent();
+  }
   await startPhone();
   mountControls();
   document.documentElement.classList.add("is-ready");
